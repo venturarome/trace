@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trace/feed/feed_page.dart';
+import 'package:trace/profile/profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,18 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        //page = GeneratorPage();
-        page = Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.blueGrey[100],
-          ),
-          child: Text("We are in Feed page"),
-        );
+        page = FeedPage();
         break;
       case 1:
-        page = Text("We are in favourites page"); //FavoritesPage();
+        page = ProfilePage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -71,20 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth < 450) {
-            // return Center(
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: <Widget>[
-            //       const Text(
-            //         'You have pushed the button this many times:',
-            //       ),
-            //       Text(
-            //         '$_counter',
-            //         style: Theme.of(context).textTheme.headlineMedium,
-            //       ),
-            //     ],
-            //   ),
-            // );
             return Column(
               children: [
                 Expanded(
