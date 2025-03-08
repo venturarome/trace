@@ -57,6 +57,11 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('no widget for $selectedIndex');
     }
 
+    Set<Map<String, dynamic>> navigationItems = {
+      {'icon': Icons.route, 'label': 'Feed'},
+      {'icon': Icons.favorite, 'label': 'Favorites'},
+    };
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -71,16 +76,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: /*mainArea*/ page,),
                 SafeArea(
                   child: BottomNavigationBar(
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.route),
-                        label: 'Feed',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Favorites',
-                      ),
-                    ],
+                    items: navigationItems.map((item) {
+                      return BottomNavigationBarItem(
+                        icon: Icon(item['icon']),
+                        label: item['label'],
+                      );
+                    }).toList(),
                     currentIndex: selectedIndex,
                     onTap: (value) {
                       setState(() {
@@ -97,16 +98,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 SafeArea(
                   child: NavigationRail(
                     extended: constraints.maxWidth >= 600,
-                    destinations: [
-                      NavigationRailDestination(
-                        icon: Icon(Icons.route),
-                        label: Text('Feed'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.favorite),
-                        label: Text('Favorites'),
-                      ),
-                    ],
+                    destinations: navigationItems.map((item) {
+                      return NavigationRailDestination(
+                        icon: Icon(item['icon']),
+                        label: Text(item['label']),
+                      );
+                    }).toList(),
                     selectedIndex: selectedIndex,
                     onDestinationSelected: (value) {
                       setState(() {
